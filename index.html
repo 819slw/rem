@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="format-detection" content="telephone=yes"/>
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta http-equiv="Time" content="<%= new Date() %>" />
+    <meta
+      http-equiv="Version-Type"
+      content="<%= htmlWebpackPlugin.options.versionType %>"
+    />
+    <title><%= htmlWebpackPlugin.options.title%></title>
+
+    <style>
+      /* css reset start */
+      body,
+      ul,
+      li,
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      img,
+      br,
+      hr,
+      table,
+      tr,
+      td,
+      dl,
+      dt,
+      dd,
+      form {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        overflow: hidden;
+        height: 100%;
+      }
+      body {
+        font-family: 'Microsoft YaHei', Arial;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        height: 100%;
+        background: #ffffff;
+      }
+      .clear:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      ul,
+      li {
+        list-style: none;
+      }
+      img {
+        border: 0;
+      }
+      input,
+      select,
+      button,
+      textarea {
+        background: none;
+        border: none;
+        outline: none;
+        font-family: 'Microsoft YaHei', Arial;
+      }
+      :-moz-placeholder {
+        color: #b2b2b2;
+        font-family: 'Microsoft YaHei', Arial;
+      }
+      ::-moz-placeholder {
+        color: #b2b2b2;
+        font-family: 'Microsoft YaHei', Arial;
+      }
+      input:-ms-input-placeholder,
+      textarea:-ms-input-placeholder {
+        color: #b2b2b2;
+        font-family: 'Microsoft YaHei', Arial;
+      }
+      input::-webkit-input-placeholder,
+      textarea::-webkit-input-placeholder {
+        color: #b2b2b2;
+        font-family: 'Microsoft YaHei', Arial;
+      }
+      .fl {
+        float: left;
+      }
+      .fr {
+        float: right;
+      }
+      .van-field__control {
+        color: #666666 !important;
+      }
+      .slide-right-enter-active,
+      .slide-right-leave-active,
+      .slide-left-enter-active,
+      .slide-left-leave-active {
+        will-change: transform;
+        transition: all 500ms;
+        position: absolute;
+      }
+      .slide-right-enter {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+      }
+      .slide-right-leave-active {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+      }
+      .slide-left-enter {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+      }
+      .slide-left-leave-active {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      // if (navigator.userAgent.indexOf('pgj-android') !== -1) {
+      //   if (window.location.href.indexOf('load') === -1) {
+      //     if (window.location.href.indexOf('?') === -1) {
+      //       window.location.href = window.location.href + '?load=1'
+      //     } else {
+      //       window.location.href = window.location.href + '&load=1'
+      //     }
+      //   }
+      // }
+
+      ;(function(designWidth, maxWidth) {
+        var doc = document
+        var win = window
+        var docEl = doc.documentElement
+        var tid
+        var rootItem, rootStyle
+
+        function refreshRem() {
+          var width = docEl.getBoundingClientRect().width
+          var dpr = window.devicePixelRatio || 1
+          docEl.setAttribute('data-dpr', dpr)
+          if (!maxWidth) {
+            maxWidth = 750
+          }
+          if (width > maxWidth) {
+            width = maxWidth
+          }
+          var rem = (width * 75) / designWidth
+          // 兼容UC开始
+          rootStyle = 'html{font-size:' + rem + 'px !important}'
+          rootItem =
+            document.getElementById('rootsize') ||
+            document.createElement('style')
+          if (!document.getElementById('rootsize')) {
+            document.getElementsByTagName('head')[0].appendChild(rootItem)
+            rootItem.id = 'rootsize'
+          }
+          if (rootItem.styleSheet) {
+            rootItem.styleSheet.disabled ||
+              (rootItem.styleSheet.cssText = rootStyle)
+          } else {
+            try {
+              rootItem.innerHTML = rootStyle
+            } catch (f) {
+              rootItem.innerText = rootStyle
+            }
+          }
+          // 兼容UC结束
+          docEl.style.fontSize = rem + 'px'
+        }
+        refreshRem()
+        if (doc.readyState === 'complete') {
+          doc.body.style.fontSize = '16px'
+        } else {
+          doc.addEventListener(
+            'DOMContentLoaded',
+            function(e) {
+              doc.body.style.fontSize = '16px'
+            },
+            false
+          )
+        }
+      })(750, 750)
+    </script>
+    <canvas id="compressCanvas" style="display:none"></canvas>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
